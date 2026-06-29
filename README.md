@@ -1,11 +1,11 @@
-# The Forecaster — A Multi-Agent Autonomous Financial-Forecasting System
+# The Forecaster: A Multi-Agent Portfolio Management System for one Portfolio Manager
 
 > CMU Agentic AI Capstone · a from-scratch, single-notebook multi-agent system that produces
 > **calibrated return-and-volatility distributions** (never point estimates) for a portfolio
 > manager, proposes rule-bounded trades, and **escalates to a human when it should not act alone**.
 
-The Forecaster runs a **two-level ReAct loop** — a LangGraph state graph of five specialist agents
-wrapped around an inner Tree-of-Thought beam search — over local Ollama models, MCP-served tools, a
+The Forecaster runs a **two-level ReAct loop**: a LangGraph state graph of five specialist agents
+wrapped around an inner Tree-of-Thought beam search, over local Ollama models, MCP-served tools, a
 RAG corpus with a deterministic citation verifier, a quant library, and persistent SQLite memory. It
 is **fully local** (no cloud LLM, no per-token billing) and **offline-graceful** (deterministic stubs
 + fixed seed), so it runs to completion online or offline, reproducibly.
@@ -15,11 +15,11 @@ is **fully local** (no cloud LLM, no per-token billing) and **offline-graceful**
 ## 1. The problem & the user
 
 A **portfolio manager (PM)** holding US-listed equities, ETFs, and options must continuously fuse five
-very different streams — market data, fundamentals, news flow, inter-asset structure, and their own
-discretionary views — for every basket and every horizon they care about. That workload outruns the
+very different streams (market data, fundamentals, news flow, inter-asset structure, and their own
+discretionary views) for every basket and every horizon they care about. That workload outruns the
 human attention budget. Worse, a single number ("+2.1% next week") is *unusable* for a fiduciary,
-because position sizing, hedging, and risk limits are functions of the **distribution** — its
-dispersion, tails, and the confidence behind the call — not the mean.
+because position sizing, hedging, and risk limits are functions of the **distribution**: its
+dispersion, tails, and the confidence behind the call, not the mean.
 
 **Intended user:** exactly one internal PM. The system *proposes*; the PM *disposes* and remains the
 accountable party. Discretionary views are first-class inputs (a Black-Litterman posterior + a PM-notes
@@ -27,7 +27,7 @@ corpus), so the tool augments judgment rather than replacing it.
 
 ## 2. What it does (goal & scope)
 
-For each `{basket, horizon}` and at three horizons — **1 day / 1 week / 1 month** — it produces a
+For each `{basket, horizon}` and at three horizons (**1 day / 1 week / 1 month**) it produces a
 **calibrated return/volatility distribution**, then proposes rule-bounded trades and escalates whenever
 confidence is low, a hard rule is violated, the input looks out-of-distribution, or an autonomy
 threshold is exceeded. Output is always cited, auditable, and reproducible.
@@ -60,9 +60,9 @@ scenarios open) while **risk-gating is convergent** (collapse them against hard 
                      memory + AsyncSqlite checkpointer (short-term) + Reflexion learning
 ```
 
-- **Outer loop** — a LangGraph directed graph sequences five agents; an `AsyncSqliteSaver` checkpointer
+- **Outer loop**: a LangGraph directed graph sequences five agents; an `AsyncSqliteSaver` checkpointer
   persists state and a human-in-the-loop interrupt fires at the gate.
-- **Inner loop** — inside Research, a Tree-of-Thought beam (K=3 branches, width W=3, depth D=3, prune
+- **Inner loop**: inside Research, a Tree-of-Thought beam (K=3 branches, width W=3, depth D=3, prune
   threshold τ=0.45) proposes competing, evidence-tilted scenarios scored on a five-part rubric
   (grounding, evidence, quantitative plausibility, calibration prior, feasibility). The **deterministic
   citation verifier is the only hard pruner.**
@@ -84,10 +84,10 @@ distribution & multi-horizon dashboards, PIT calibration, gate/HRP risk budget, 
 
 ```
 the-forecaster/
-├── the_forecaster.ipynb        # the complete system — 96 cells, single self-contained notebook
+├── the_forecaster.ipynb        # the complete system: 96 cells, single self-contained notebook
 ├── README.md                   # this file
 ├── requirements.txt            # dependencies (all behind guarded imports; stubs if absent)
-├── .env.example                # optional API keys / run mode — copy to .env (every key optional)
+├── .env.example                # optional API keys / run mode; copy to .env (every key optional)
 ├── .gitignore                  # excludes secrets + regenerable data stores
 └── samples/                    # evaluation artifacts you can read without running anything
     ├── figures/                # 12 dashboards & architecture diagrams (PNG)
@@ -122,10 +122,10 @@ deterministic stubs** (seeded synthetic GBM prices, stub LLM/embeddings) and sti
 
 Open `the_forecaster.ipynb` in Jupyter and **Restart & Run All**.
 
-- **Fast, deterministic pass** — set `FORECASTER_FAST=1` in the environment *before* launching Jupyter
+- **Fast, deterministic pass**: set `FORECASTER_FAST=1` in the environment *before* launching Jupyter
   (or in `.env`). A full five-agent cycle completes in under a minute.
-- **Reproducibility** — a global `SEED=7` anchors every stochastic component.
-- **Live vs. offline** — with the live stack present the notebook adds richer prose and real prices on
+- **Reproducibility**: a global `SEED=7` anchors every stochastic component.
+- **Live vs. offline**: with the live stack present the notebook adds richer prose and real prices on
   top of *identical* decision logic; with nothing present it produces clearly-labeled degraded output.
 - Live paper orders remain **disabled by default** (`submit_paper_order(..., do_submit=False)`).
 
@@ -149,9 +149,9 @@ Backed by three more instruments: a **no-look-ahead walk-forward backtest** vs. 
 smoke-check invariants** that `assert` end-to-end correctness and halt the run on any failure; and
 **Tree-of-Thought instrumentation** (logged to a separate `metrics_db`, never touching the deliverable
 DB). Representative finding: across 25 searches the ToT logged 309 scored branches (~83% alive) and
-**all 54 prunes came from the grounding gate** — confirming the citation verifier, not the τ threshold,
+**all 54 prunes came from the grounding gate**, confirming the citation verifier, not the τ threshold,
 is the real hard pruner, exactly as designed. See [`samples/reports/`](samples/reports) for a grounded,
-gate-approved NVDA cycle (full p05–p95 ladder per horizon) and a fallback-escalation cycle.
+gate-approved NVDA cycle (full p05 to p95 ladder per horizon) and a fallback-escalation cycle.
 
 ## 8. Safety, reliability & human oversight
 
