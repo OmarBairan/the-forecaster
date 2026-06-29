@@ -84,7 +84,7 @@ distribution & multi-horizon dashboards, PIT calibration, gate/HRP risk budget, 
 
 ```
 the-forecaster/
-├── the_forecaster.ipynb        # the complete system — 104 cells, single self-contained notebook
+├── the_forecaster.ipynb        # the complete system — 96 cells, single self-contained notebook
 ├── README.md                   # this file
 ├── requirements.txt            # dependencies (all behind guarded imports; stubs if absent)
 ├── .env.example                # optional API keys / run mode — copy to .env (every key optional)
