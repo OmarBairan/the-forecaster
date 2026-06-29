@@ -1,5 +1,5 @@
-# Agent cycle report — NVDA  (cycle `cycle-3f79571a`)
-*generated 20260628-221130 · horizon 5d · forecast_id `fc_d4e4bdae35`*
+# Agent cycle report — NVDA  (cycle `cycle-779eaf37`)
+*generated 20260629-012540 · horizon 5d · forecast_id `fc_7711d31360`*
 
 ## ReAct trace (agent-by-agent)
 
@@ -35,4 +35,4 @@
 
 - `one_way_handoff`  orchestrator → research  {"task": "forecast", "symbol": "NVDA", "horizon_days": 5}
 - `two_way_validation`  risk_gate → orchestrator  {"role": "gate", "status": "fallback_resolved", "kind": "fallback_escalation"}
-- `one_way_handoff`  reporting → memory_write  {"report_chars": 2171}
+- `one_way_handoff`  reporting → memory_write  {"report_chars": 2140}

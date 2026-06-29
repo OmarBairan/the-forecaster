@@ -1,8 +1,8 @@
 {
-  "cycle_id": "cycle-3f79571a",
+  "cycle_id": "cycle-779eaf37",
   "symbol": "NVDA",
-  "forecast_id": "fc_d4e4bdae35",
-  "ts": "20260628-221130",
+  "forecast_id": "fc_7711d31360",
+  "ts": "20260629-012540",
   "horizon_days": 5,
   "forecast": {
     "mu": 0.00216,
