@@ -177,8 +177,7 @@ Prototype-scope sample corpora → ingest full EDGAR + a transcript feed through
 `index_corpora()` path. Heston not chain-calibrated → fit to a live options chain. Equal-weight
 Black-Litterman prior → cap-weighted equilibrium prior. Local-model latency makes the committed backtest
 a throttled, short-window demo → run the overnight full-fidelity `REBALANCE_EVERY=1` multi-year backtest.
-Small fresh evaluation sample in FAST mode → enlarge it. Optional packaging as a Claude Code plugin / MCP
-server.
+Small fresh evaluation sample in FAST mode → enlarge it. Optional packaging as an MCP server.
 
 ---
 
