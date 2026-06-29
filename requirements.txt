@@ -1,45 +1,49 @@
-# The Forecaster — Python dependencies.
+# The Forecaster — Python dependencies (pinned).
+# Versions are those of the tested environment: the "cmu-agentic-ai" Jupyter
+# kernel on Python 3.12.6.  Install with:  pip install -r requirements.txt
+#
 # The notebook is OFFLINE-GRACEFUL: every dependency below sits behind a guarded
 # import with a deterministic stub, so a bare numpy/pandas machine still runs the
 # whole notebook. Install the full set to enable real LLMs, RAG, and live data.
-#
-# Tested on Python 3.11 (the "cmu-agentic-ai" kernel).
 
 # --- Multi-agent coordination & local LLM binding ---
-langgraph
-langchain-ollama
-ollama
-aiosqlite                 # AsyncSqliteSaver checkpointer (short-term memory)
+langgraph==1.2.1
+langgraph-checkpoint-sqlite==3.1.0    # AsyncSqliteSaver checkpointer (short-term memory)
+langchain-ollama==1.1.0               # ChatOllama binding to the local Ollama models
+ollama==0.6.2
+aiosqlite==0.22.1                     # async SQLite driver behind the checkpointer
 
 # --- Tools over MCP ---
-mcp                       # FastMCP servers: market-data-and-quant, research-retrieval, technical-indicators
+mcp==1.27.1                           # FastMCP servers: market-data-and-quant, research-retrieval, technical-indicators
 
 # --- Retrieval (RAG): hybrid BM25 + dense BGE + cross-encoder rerank ---
-chromadb
-rank-bm25
-sentence-transformers
-torch                     # backs sentence-transformers
-tiktoken
+chromadb==1.5.9
+rank-bm25==0.2.2
+sentence-transformers==5.5.1
+torch==2.12.0                         # backs sentence-transformers
+tiktoken==0.13.0
 
 # --- Quant library ---
-numpy
-pandas
-scipy
+numpy==2.4.6
+pandas==2.3.3
+scipy==1.17.1
 
 # --- Market data (guarded; falls back to seeded synthetic GBM) ---
-alpaca-py
-yfinance
-beautifulsoup4            # lightweight news/filing parsing
+alpaca-py==0.43.4
+yfinance==1.4.1
+beautifulsoup4==4.14.3                # lightweight news/filing parsing
 
 # --- Config, validation, UI & visualization ---
-python-dotenv
-pydantic
-ipywidgets
-matplotlib
-plotly
-networkx
+python-dotenv==1.2.2
+pydantic==2.13.4
+ipywidgets==8.1.8                     # interactive configuration panel
+matplotlib==3.10.9                    # offline chart fallback
+plotly==6.7.0                         # primary chart renderer
+kaleido==1.3.0                        # static PNG export of Plotly charts (figures/)
+networkx==3.6.1                       # agent / MCP topology graphs
 
 # --- Notebook runtime ---
-jupyter
-nbconvert
-ipython
+ipykernel==7.2.0                      # registers/runs the "cmu-agentic-ai" kernel
+ipython==9.13.0
+nbconvert==7.17.1                     # HTML / PDF export of the notebook
+# Plus a Jupyter front-end to open the .ipynb: JupyterLab, classic Notebook, or VS Code.
