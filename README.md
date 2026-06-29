@@ -88,15 +88,22 @@ the-forecaster/
 ├── README.md                   # this file
 ├── requirements.txt            # dependencies (all behind guarded imports; stubs if absent)
 ├── .env.example                # optional API keys / run mode; copy to .env (every key optional)
-├── .gitignore                  # excludes secrets + regenerable data stores
+├── .gitignore                  # excludes secrets and transient SQLite journals
+├── news_db/                    # news archive (SQLite)
+├── forecaster_db/              # long-term memory: forecasts, outcomes, reflections, audit log, ledgers
+├── checkpoints_db/             # LangGraph short-term checkpointer state
+├── metrics_db/                 # Tree-of-Thought search instrumentation
+├── vector_db/                  # Chroma vector store for the four RAG corpora
 └── samples/                    # evaluation artifacts you can read without running anything
-    ├── figures/                # 12 dashboards & architecture diagrams (PNG)
+    ├── figures/                # 12 dashboards and architecture diagrams (PNG)
     └── reports/                # per-cycle PM reports (a grounded+approved cycle and a fallback
                                 # escalation cycle), plus a coordination-ledger excerpt
 ```
 
-The notebook recreates its own data folders (`forecaster_db/`, `vector_db/`, `metrics_db/`, …) on first
-run, so they are intentionally **not** committed.
+The `*_db/` and `vector_db/` folders are a **populated snapshot from a real run** (about 66 MB): the
+long-term memory, the short-term checkpointer state, the Tree-of-Thought metrics, the news archive, and the
+Chroma vector index. They let a reviewer inspect the system's memory and audit trail without running
+anything. The notebook will recreate or extend them on its own when run.
 
 ## 5. Setup
 

@@ -1,14 +1,12 @@
-# Secrets — never commit
+# Secrets: never commit
 .env
 
-# Generated, self-contained data stores (the notebook recreates these on run).
-# Anchored to the repo root with a leading slash so the curated samples/ copies
-# (samples/figures, samples/reports) are NOT ignored.
-/news_db/
-/forecaster_db/
-/checkpoints_db/
-/metrics_db/
-/vector_db/
+# Transient SQLite journals (the .db snapshots are committed; these are not)
+*.db-wal
+*.db-shm
+*-journal
+
+# Regenerable render artifacts (the curated copies live under samples/)
 /figures/
 /reports/
 
