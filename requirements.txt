@@ -1,0 +1,45 @@
+# The Forecaster — Python dependencies.
+# The notebook is OFFLINE-GRACEFUL: every dependency below sits behind a guarded
+# import with a deterministic stub, so a bare numpy/pandas machine still runs the
+# whole notebook. Install the full set to enable real LLMs, RAG, and live data.
+#
+# Tested on Python 3.11 (the "cmu-agentic-ai" kernel).
+
+# --- Multi-agent coordination & local LLM binding ---
+langgraph
+langchain-ollama
+ollama
+aiosqlite                 # AsyncSqliteSaver checkpointer (short-term memory)
+
+# --- Tools over MCP ---
+mcp                       # FastMCP servers: market-data-and-quant, research-retrieval, technical-indicators
+
+# --- Retrieval (RAG): hybrid BM25 + dense BGE + cross-encoder rerank ---
+chromadb
+rank-bm25
+sentence-transformers
+torch                     # backs sentence-transformers
+tiktoken
+
+# --- Quant library ---
+numpy
+pandas
+scipy
+
+# --- Market data (guarded; falls back to seeded synthetic GBM) ---
+alpaca-py
+yfinance
+beautifulsoup4            # lightweight news/filing parsing
+
+# --- Config, validation, UI & visualization ---
+python-dotenv
+pydantic
+ipywidgets
+matplotlib
+plotly
+networkx
+
+# --- Notebook runtime ---
+jupyter
+nbconvert
+ipython
